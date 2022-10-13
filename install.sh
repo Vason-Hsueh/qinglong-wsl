@@ -1,3 +1,17 @@
+read -p "请输入需要安装的nodejs版本,默认18.10.0" node_version
+if [ -z "$node_version" ]
+then
+	node_version=18.10.0
+else
+	node_version=$node_version
+fi
+read -p "请输入需要安装的青龙版本,默认最新版本" ql
+if [ -z "$ql" ]
+then
+	ql_version=develop
+else
+	ql_version=v$ql
+fi
 sed -i "s@https://dl-cdn.alpinelinux.org/@https://mirrors.aliyun.com/@g" //etc/apk/repositories
 apk update --no-cache
 apk add --no-cache vim bash coreutils moreutils git curl wget tzdata perl openssl nginx jq openssh py3-pip  python3  gcc 
@@ -14,13 +28,6 @@ sed -i "3i maintainer=whyour" /etc/profile
 sed -i "3i QL_MAINTAINER=whyour" /etc/profile
 source /etc/profile
 rm -rf /var/cache/apk/*
-read -p "请输入需要安装的nodejs版本,默认18.10.0" node_version
-if [ -z "$node_version" ]
-then
-	node_version=18.10.0
-else
-	node_version=$node_version
-fi
 wget https://unofficial-builds.nodejs.org/download/release/v$node_version/node-v$node_version-linux-x64-musl.tar.xz -O ~/node-musl.tar.xz
 tar -xJf ~/node-musl.tar.xz -C /usr/local --strip-components=1 --no-same-owner
 ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -39,13 +46,6 @@ pnpm setup
 source ~/.bashrc
 pnpm install -g pm2 ts-node typescript tslib @types/node@"*"  
 cd /
-read -p "请输入需要安装的青龙版本,默认最新版本" ql
-if [ -z "$ql" ]
-then
-	ql_version=develop
-else
-	ql_version=v$ql
-fi
 git clone -b $ql_version https://github.com/whyour/qinglong.git
 mv qinglong ql
 cd ql
