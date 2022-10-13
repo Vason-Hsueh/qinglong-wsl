@@ -12,6 +12,12 @@ then
 else
 	ql_version=v$ql
 fi
+echo "[network]" > /etc/wsl.conf
+echo "generateResolvConf = false" >> /etc/wsl.conf
+cat /etc/resolv.conf > /etc/resolv.conf.bak
+rm -rf /etc/resolv.conf
+sed -i '1,3d' /etc/resolv.conf.bak
+cp /etc/resolv.conf.bak /etc/resolv.conf
 sed -i "s@https://dl-cdn.alpinelinux.org/@https://mirrors.aliyun.com/@g" //etc/apk/repositories
 apk update --no-cache
 apk add --no-cache vim bash coreutils moreutils git curl wget tzdata perl openssl nginx jq openssh py3-pip  python3  gcc 
