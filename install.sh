@@ -17,6 +17,7 @@ echo "generateResolvConf = false" >> /etc/wsl.conf
 cat /etc/resolv.conf > /etc/resolv.conf.bak
 rm -rf /etc/resolv.conf
 sed -i '1,3d' /etc/resolv.conf.bak
+sed -i '3d' /etc/resolv.conf.bak
 cp /etc/resolv.conf.bak /etc/resolv.conf
 sed -i "s@https://dl-cdn.alpinelinux.org/@https://mirrors.aliyun.com/@g" //etc/apk/repositories
 apk update --no-cache
