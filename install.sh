@@ -55,15 +55,15 @@ chmod 777 ${QL_DIR}/docker/*.sh
 git clone https://github.com/whyour/qinglong-static.git
 mv qinglong-static static
 sed -i "2i QL_DIR=/ql" /ql/shell/*.sh
-pnpm install --prod
-rm -rf api
-rm -rf bot
-rm -rf check
-rm -rf notify
-rm -rf rmlog
-rm -rf ql
-rm -rf share
-rm -rf task
+pnpm install
+rm -rf /usr/local/bin/bot
+rm -rf /usr/local/bin/check
+rm -rf /usr/local/bin/notify
+rm -rf /usr/local/bin/share
+rm -rf /usr/local/bin/task
+rm -rf /usr/local/bin/rmlog
+rm -rf /usr/local/bin/ql
+rm -rf /usr/local/bin/api
 ln -s /ql/shell/bot.sh /usr/local/bin/bot
 ln -s /ql/shell/check.sh /usr/local/bin/check
 ln -s /ql/shell/notify.sh /usr/local/bin/notify
